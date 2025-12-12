@@ -1,75 +1,64 @@
-/* Contact */
+/* ================================
+   PAGE CONTACT - STYLE UNIFIÉ
+   Avec Bootstrap + Thème existant
+   ================================ */
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f5f5f5;
+    background: #F8F8F8;
+    font-family: 'Georgia', serif;
 }
 
-.container {
+/* Conteneur principal */
+.contact-container {
     max-width: 900px;
-    margin: 40px auto;
     background: white;
     padding: 30px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+/* Titres */
+h1, h2 {
+    color: #3C4B64;
+    font-weight: bold;
+}
+
+/* Champs du formulaire */
+.form-control {
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-}
-
-form input, form textarea {
-    width: 100%;
     padding: 12px;
+    font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 15px;
 }
 
-form textarea {
-    grid-column: 1 / 3;
+textarea.form-control {
     height: 150px;
 }
 
-button {
-    grid-column: 1 / 3;
-    padding: 15px;
-    background: #007bff;
+/* Bouton principal */
+.btn-contact {
+    background: #3C4B64;
     color: white;
-    border: none;
-    border-radius: 5px;
+    border-radius: 10px;
+    padding: 12px 20px;
     font-size: 18px;
-    cursor: pointer;
-    transition: 0.3s;
+    width: 100%;
 }
 
-button:hover {
-    background: #0056b3;
+.btn-contact:hover {
+    background: #2F3B51;
 }
 
-.info {
-    margin-top: 40px;
-}
-
+/* Infos hôtel */
 .info p {
     font-size: 18px;
 }
 
-.map {
-    margin-top: 20px;
-}
+/* Carte */
 .map iframe {
     width: 100%;
     height: 300px;
+    border-radius: 10px;
     border: none;
-    border-radius: 5px;
 }
