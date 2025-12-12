@@ -27,5 +27,55 @@
 
 <div id="listeChambres" class="row"></div>
 </div>
+
+<script>
+// Chambres avec règles de disponibilité
+const chambres = [
+    { nom: "Chambre Premium", prix: 120, image: "https://picsum.photos/id/1035/800/600", description: "Confort et élégance avec vue panoramique.", minNuits: 1 },
+    { nom: "Chambre Confort", prix: 95, image: "https://picsum.photos/id/1043/800/600", description: "Un espace chaleureux pour un séjour paisible.", minNuits: 1 },
+    { nom: "Suite Luxueuse", prix: 180, image: "https://picsum.photos/id/1050/800/600", description: "Un espace exceptionnel avec salon privé.", minNuits: 2 }
+];
+
+function afficherDisponibilites() {
+    const debut = document.getElementById("dateArrivee").value;
+    const fin = document.getElementById("dateDepart").value;
+    if(!debut || !fin){ alert("Sélectionnez vos dates."); return; }
+
+    const d1 = new Date(debut);
+    const d2 = new Date(fin);
+    const nuits = (d2 - d1) / (1000*3600*24);
+    if(nuits <=0){ alert("Dates invalides."); return; }
+
+    const zone = document.getElementById("listeChambres");
+    zone.innerHTML = "";
+
+    const disponibles = chambres.filter(c=>nuits>=c.minNuits);
+    if(disponibles.length===0){ zone.innerHTML="<p class='text-center fw-bold text-danger'>Aucune chambre disponible pour ces dates.</p>"; return; }
+
+    disponibles.forEach(ch=>{
+        zone.innerHTML += `
+        <div class="col-md-4 mb-4">
+            <div class="card shadow p-3">
+                <img src="${ch.image}" class="room-img w-100 mb-3">
+                <h4>${ch.nom}</h4>
+                <p>${ch.description}</p>
+                <p class="fw-bold">${ch.prix} € / nuit</p>
+                <button class="btn-reserver w-100" onclick="reserver('${ch.nom}',${ch.prix})">Réserver</button>
+            </div>
+        </div>`;
+    });
+}
+
+function reserver(type, prix){
+    const debut = document.getElementById("dateArrivee").value;
+    const fin = document.getElementById("dateDepart").value;
+    const nuits = (new Date(fin)-new Date(debut))/(1000*3600*24);
+    const total = nuits*prix;
+    localStorage.setItem("chambre", type);
+    localStorage.setItem("dates", `du ${debut} au ${fin}`);
+    localStorage.setItem("total", total);
+    window.location.href="paiement.html";
+}
+</script>
 </body>
 </html>
